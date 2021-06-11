@@ -4,19 +4,8 @@ const app = express();
 const PORT = 3000;
 const { MONGOURI } = require("./keys");
 
-// const bodyParser = require('body-parser');
 
-// app.use(bodyParser.urlencoded({
-//     extended: false
-//  }));
- 
-//  app.use(express.static(__dirname + '/public'));
-//  app.use(bodyParser.json());
 
-require('./models/user');
-
-app.use(express.json()); // this line MUST be before require routes so all routes use this
-app.use(require('./routes/auth'));
 
 
 mongoose.connect(MONGOURI, { 
@@ -33,6 +22,14 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (e) => {
     console.log("error with mongoDB...", e);
 })
+
+
+require('./models/user');
+require('./models/post');
+
+app.use(express.json()); // this line MUST be before require routes so all routes use this
+app.use(require('./routes/auth'));
+app.use(require('./routes/post'));
 
 
 
