@@ -4,6 +4,15 @@ const app = express();
 const PORT = 3000;
 const { MONGOURI } = require("./keys");
 
+// const bodyParser = require('body-parser');
+
+// app.use(bodyParser.urlencoded({
+//     extended: false
+//  }));
+ 
+//  app.use(express.static(__dirname + '/public'));
+//  app.use(bodyParser.json());
+
 require('./models/user');
 
 app.use(express.json()); // this line MUST be before require routes so all routes use this
