@@ -5,6 +5,11 @@ const User = mongoose.model("User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../keys');
+const requireLogin = require('../middleware/requireLogin');
+
+router.get('/protected', requireLogin, (req, res) => {
+    res.send("hello user, you've made it to the protected page!");
+});
 
 
 router.post('/signup', (req, res) => {
@@ -57,7 +62,7 @@ router.post('/signin', (req, res) => {
                     if (doMatch) {
                         // res.json({ message: "successfully signed in" });
                         const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET);
-                        res.json({ token })
+                        res.json({ token });
 
 
                     } else {
