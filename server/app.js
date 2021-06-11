@@ -6,6 +6,10 @@ const { MONGOURI } = require("./keys");
 
 require('./models/user');
 
+app.use(express.json()); // this line MUST be before require routes so all routes use this
+app.use(require('./routes/auth'));
+
+
 mongoose.connect(MONGOURI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
