@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 const { MONGOURI } = require("./keys");
+//var cors = require('cors')
 
 
 
@@ -30,6 +31,7 @@ require('./models/post');
 app.use(express.json()); // this line MUST be before require routes so all routes use this
 app.use(require('./routes/auth'));
 app.use(require('./routes/post'));
+//app.use(cors());
 
 
 

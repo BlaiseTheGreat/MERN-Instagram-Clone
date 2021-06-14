@@ -29,7 +29,7 @@ router.post('/signup', (req, res) => {
 
                     user.save()
                         .then(user => {
-                            res.json({ massage: "saved successfully" });
+                            res.json({ message: "saved successfully" });
                         })
                         .catch(err => {
                             console.log(err);
