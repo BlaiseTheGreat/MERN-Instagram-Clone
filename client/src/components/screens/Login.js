@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { UserContext } from '../../App';
 import M from 'materialize-css';
 
 const Login = () => {
+    const {state, dispatch} = useContext(UserContext);
     const history = useHistory()
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -28,6 +30,7 @@ const Login = () => {
                 } else {
                     localStorage.setItem("jwt", data.token);
                     localStorage.setItem("user", JSON.stringify(data.user));
+                    dispatch({type:"USER", payload:data.user})
                     M.toast({ html: "logged in successfully", classes: "#66bb6a green lighten-1" })
                     history.push('/');
                 }
@@ -53,10 +56,10 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button 
+                <button
                     className="btn waves-effect waves-light #64b5f6 blue darken-1"
-                    onClick={()=>PostData()}
-                    >
+                    onClick={() => PostData()}
+                >
                     Login
                 </button>
                 <h5>
